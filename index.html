@@ -12,6 +12,7 @@ and open the template in the editor.
         <link href="css/anustyle.css" rel="stylesheet" type="text/css" media="screen">
         <script src="js/libs/jquery/jquery.js"></script>
         <script src="js/startup.js"></script>
+        <script src="js/db_faa.js"></script>
         <script>
             function showMain() {
                 $(function() {
@@ -24,6 +25,8 @@ and open the template in the editor.
                     $("#"+x_off).hide();
                     $("#"+x_on).show();
                 });
+                if (x_on == "divSetup")
+                    getFaa();
             }
         </script>
     </head>
@@ -46,10 +49,10 @@ and open the template in the editor.
                     <input type="date" class="dates" id="x_faaedate" name="x_faaedate"/>
                     <br />
                     <label for="x_faedesc"><strong>Description</strong></label>
-                    <textarea rows="3" cols="60" class="text" id="x_faedesc" name="x_faedesc"></textarea>
+                    <textarea rows="3" cols="60" class="text" id="x_faadesc" name="x_faadesc"></textarea>
                     <br />
                     <label for="x_faearea"><strong>Area</strong></label>
-                    <textarea rows="3" cols="60" class="text" id="x_faearea" name="x_faearea"></textarea>
+                    <textarea rows="3" cols="60" class="text" id="x_faaarea" name="x_faaarea"></textarea>
                 </fieldset>
             </form>
             <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divSetup', 'content')">
