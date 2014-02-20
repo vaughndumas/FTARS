@@ -34,8 +34,9 @@ and open the template in the editor.
         <div id="content">
             <h1 style="text-align: center">Field Trip</h1>
             <h2 style="text-align: center">Attribute Recording</h2>
-            <input class="btn-uni-grad btn-xlarge" style="width: 100%" type="button" value="SETUP" onClick="divToggle('content', 'divSetup');">
-            <input class="btn-uni-grad btn-xlarge" style="width: 100%" type="button" value="VIEW Specimens" onClick="divToggle('content', 'divListSpecimens');">
+            <input class="btn-uni-grad btn-xlarge" style="width: 100%" type="button" value="Setup" onClick="divToggle('content', 'divSetup');">
+            <input class="btn-uni-grad btn-xlarge" style="width: 100%" type="button" value="Define Species" onClick="divToggle('content', 'divSetupSpecies');">
+            <input class="btn-uni-grad btn-xlarge" style="width: 100%" type="button" value="View Specimens" onClick="divToggle('content', 'divListSpecimens');">
         </div>
         <div id="divSetup" style="display:none; background-color: #FFF">
             <h1 style="text-align: center">FTARS Setup</h1>
@@ -60,6 +61,36 @@ and open the template in the editor.
         <div id="divListSpecimens" style="display:none">
             <h1 style="text-align: center">FTARS Specimen List</h1>
             <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divListSpecimens', 'content')">
+        </div>
+        <div id="divSetupSpecies" style="display:none">
+            <h1 style="text-align: center">FTARS Species List</h1>
+            <input class="btn-uni-grad btn-medium" type="button" value="Add a species" onClick="divToggle('divSetupSpecies', 'divAddSpecies')">
+            <table id="tbl_species_list" class="fullwidth">
+                <tr>
+                    <th>Name</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </table>
+            <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divSetupSpecies', 'content')">
+        </div>
+        <div id="divAddSpecies" style="display:none">
+            <h1>Add a species</h1>
+            <form id="frmAddSpecies" class="anuform">
+                <fieldset>
+                    <legend>Add a new species</legend>
+                    <label for="x_fababbr"><strong>Abbreviation</strong></label>
+                    <input type="text" class="text" id="x_fababbr" name="x_fababbr" maxlength="16"/>
+                    <br />
+                    <label for="x_fabname"><strong>Name</strong></label>
+                    <input type="text" class="dates" id="x_fabname" name="x_fabname" maxlength="64"/>
+                    <br />
+                    <label for="x_fabdefault"><strong>Default?</strong></label>
+                    Yes&nbsp;<input type="radio" id="x_fabdefault_Y" name="x_fabdefault" value="Y"/>
+                    No&nbsp;<input type="radio" id="x_fabdefault_N" name="x_fabdefault" value="N" checked="checked"/>
+                </fieldset>
+                <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divAddSpecies', 'divSetupSpecies')">
+                <input class="btn-uni-grad btn-medium" type="button" value="Save">
+            </form>
         </div>
     </body>
 </html>

@@ -2,10 +2,9 @@
 /////
 ///Error Handler
 /////
-function errorHandler(transaction, error) {
-    //Log the error
-    console.log('Error: ' + error.message + ' (Code ' + error.code + ')');
-}
+//function errorHandler(transaction, error) {
+//    console.log('Error: ' + error.message + ' (Code ' + error.code + ')');
+//}
 
 /////
 ///Null Data
@@ -46,6 +45,17 @@ $(document).ready(function(){
                            + 'faaarea VARCHAR(128)'
                            + ');',[],nullData,errorHandler);
         });
+        /* Create table FABSPE - species */
+        db.transaction(function(tx){
+            tx.executeSql('CREATE TABLE IF NOT EXISTS fabspe ('
+                           + 'fabcode INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,'
+                           + 'fababbr VARCHAR(16),'
+                           + 'fabname VARCHAR(64),'
+                           + 'fabdefault VARCHAR(1)'
+                           + ');',[],nullData,errorHandler);
+        });
+        
+        
         /* Get the number of records in the FAA table
          * If none exist, then create one with the code of one
          */
