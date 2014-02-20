@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>ANU - FTARS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link href="css/anustyle.css" rel="stylesheet" type="text/css" media="screen">
+        <script src="js/libs/jquery/jquery.js"></script>
+        <!-- <script src="js/db.js"></script> -->
+        <script>
+            function showMain() {
+                $(function() {
+                   $("#divSetup").hide();
+                   $("#content").show();
+                });
+            }
+            function divToggle(x_off, x_on) {
+                $(function() {
+                    $("#"+x_off).hide();
+                    $("#"+x_on).show();
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div id="content">
+            <h1 style="text-align: center">Field Trip</h1>
+            <h2 style="text-align: center">Attribute Recording</h2>
+            <input class="btn-uni-grad btn-xlarge" style="width: 100%" type="button" value="SETUP" onClick="divToggle('content', 'divSetup');">
+            <input class="btn-uni-grad btn-xlarge" style="width: 100%" type="button" value="VIEW Specimens" onClick="divToggle('content', 'divListSpecimens');">
+        </div>
+        <div id="divSetup" style="display:none">
+            <h1 style="text-align: center">FTARS Setup</h1>
+            <form class="anuform">
+                <fieldset>
+                    <legend>Field Trip Settings</legend>
+                </fieldset>
+            </form>
+            <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divSetup', 'content')">
+        </div>
+        <div id="divListSpecimens" style="display:none">
+            <h1 style="text-align: center">FTARS Specimen List</h1>
+            <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divListSpecimens', 'content')">
+        </div>
+    </body>
+</html>
