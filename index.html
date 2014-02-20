@@ -27,14 +27,14 @@ and open the template in the editor.
             }
         </script>
     </head>
-    <body>
+    <body style="background-color: #FFF">
         <div id="content">
             <h1 style="text-align: center">Field Trip</h1>
             <h2 style="text-align: center">Attribute Recording</h2>
             <input class="btn-uni-grad btn-xlarge" style="width: 100%" type="button" value="SETUP" onClick="divToggle('content', 'divSetup');">
             <input class="btn-uni-grad btn-xlarge" style="width: 100%" type="button" value="VIEW Specimens" onClick="divToggle('content', 'divListSpecimens');">
         </div>
-        <div id="divSetup" style="display:none">
+        <div id="divSetup" style="display:none; background-color: #FFF">
             <h1 style="text-align: center">FTARS Setup</h1>
             <form class="anuform">
                 <fieldset>
@@ -44,6 +44,12 @@ and open the template in the editor.
                     <br />
                     <label for="x_faaedate"><strong>End Date</strong></label>
                     <input type="date" class="dates" id="x_faaedate" name="x_faaedate"/>
+                    <br />
+                    <label for="x_faedesc"><strong>Description</strong></label>
+                    <textarea rows="3" cols="60" class="text" id="x_faedesc" name="x_faedesc"></textarea>
+                    <br />
+                    <label for="x_faearea"><strong>Area</strong></label>
+                    <textarea rows="3" cols="60" class="text" id="x_faearea" name="x_faearea"></textarea>
                 </fieldset>
             </form>
             <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divSetup', 'content')">
