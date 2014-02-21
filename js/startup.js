@@ -54,6 +54,10 @@ $(document).ready(function(){
                            + 'fabdefault VARCHAR(1)'
                            + ');',[],nullData,errorHandler);
         });
+        // Temp measure - clear the table
+//        db.transaction(function(tx) {
+//           tx.executeSql('DELETE FROM fabspe', nullData, errorHandler) ;
+//        });
         
         
         /* Get the number of records in the FAA table

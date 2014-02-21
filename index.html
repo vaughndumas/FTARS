@@ -13,6 +13,7 @@ and open the template in the editor.
         <script src="js/libs/jquery/jquery.js"></script>
         <script src="js/startup.js"></script>
         <script src="js/db_faa.js"></script>
+        <script src="js/db_fab.js"></script>
         <script>
             function showMain() {
                 $(function() {
@@ -25,8 +26,10 @@ and open the template in the editor.
                     $("#"+x_off).hide();
                     $("#"+x_on).show();
                 });
-                if (x_on == "divSetup")
+                if (x_on === "divSetup")
                     getFaa();
+                if (x_on === "divSetupSpecies")
+                    getFab();
             }
         </script>
     </head>
@@ -67,6 +70,7 @@ and open the template in the editor.
             <input class="btn-uni-grad btn-medium" type="button" value="Add a species" onClick="divToggle('divSetupSpecies', 'divAddSpecies')">
             <table id="tbl_species_list" class="fullwidth">
                 <tr>
+                    <th>Abbr</th>
                     <th>Name</th>
                     <th>&nbsp;</th>
                 </tr>
@@ -74,7 +78,7 @@ and open the template in the editor.
             <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divSetupSpecies', 'content')">
         </div>
         <div id="divAddSpecies" style="display:none">
-            <h1>Add a species</h1>
+            <h1 style="text-align: center">Add a species</h1>
             <form id="frmAddSpecies" class="anuform">
                 <fieldset>
                     <legend>Add a new species</legend>
@@ -82,14 +86,14 @@ and open the template in the editor.
                     <input type="text" class="text" id="x_fababbr" name="x_fababbr" maxlength="16"/>
                     <br />
                     <label for="x_fabname"><strong>Name</strong></label>
-                    <input type="text" class="dates" id="x_fabname" name="x_fabname" maxlength="64"/>
+                    <input type="text" class="dates" id="x_fabname" name="x_fabname" maxlength="64" value=""/>
                     <br />
-                    <label for="x_fabdefault"><strong>Default?</strong></label>
+                    <label><strong>Default?</strong></label>
                     Yes&nbsp;<input type="radio" id="x_fabdefault_Y" name="x_fabdefault" value="Y"/>
                     No&nbsp;<input type="radio" id="x_fabdefault_N" name="x_fabdefault" value="N" checked="checked"/>
                 </fieldset>
                 <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divAddSpecies', 'divSetupSpecies')">
-                <input class="btn-uni-grad btn-medium" type="button" value="Save">
+                <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="insFab(); divToggle('divAddSpecies', 'divSetupSpecies')">
             </form>
         </div>
     </body>
