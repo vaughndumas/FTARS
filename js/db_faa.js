@@ -6,16 +6,24 @@ function getFaa() {
        tx.executeSql('SELECT * FROM faaftp',
                      [],
                      function(tx, v_results) {
-                         v_item = document.getElementById("x_faasdate");
-                         v_item.textContent = v_results.rows.item(0).faasdate;
-                         v_item = document.getElementById("x_faaedate");
-                         v_item.textContent = v_results.rows.item(0).faaedate;
-                         v_item = document.getElementById("x_faadesc");
-                         v_item.textContent = v_results.rows.item(0).faadesc;
-                         v_item = document.getElementById("x_faaarea");
-                         v_item.textContent = v_results.rows.item(0).faaarea;
+                         //v_item = document.getElementById("x_faasdate");
+                         $("#frmFieldTrip #x_faasdate").val(v_results.rows.item(0).faasdate);
+                         $("#frmFieldTrip #x_faaedate").val(v_results.rows.item(0).faaedate);
+                         $("#frmFieldTrip #x_faadesc").val(v_results.rows.item(0).faadesc);
+                         $("#frmFieldTrip #x_faaarea").val(v_results.rows.item(0).faaarea);
                      },
                      errorHandler);
+    });
+}
+
+function updFaa() {
+    v_faasdate = $("#frmFieldTrip #x_faasdate").val();
+    v_faaedate = $("#frmFieldTrip #x_faaedate").val();
+    v_faadesc = $("#frmFieldTrip #x_faadesc").val();
+    v_faaarea = $("#frmFieldTrip #x_faaarea").val();
+    db.transaction(function(tx) {
+       tx.executeSql('UPDATE faaftp SET faasdate = ?, faaedate = ?, faadesc = ?, faaarea = ?',
+                     [v_faasdate, v_faaedate, v_faadesc, v_faaarea], nullData, errorHandler); 
     });
 }
 
@@ -23,8 +31,10 @@ function getFaa() {
 ///Error Handler
 /////
 function errorHandler(transaction, error) {
-    //Log the error
-    console.log('Error: ' + error.message + ' (Code ' + error.code + ')');
+    var v_errmsg = 'Error: ' + error.message;
+    v_errmsg += ' Code ';
+    v_errmsg += error.code;
+    console.log(v_errmsg);
 }
 
 /////

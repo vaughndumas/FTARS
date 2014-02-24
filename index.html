@@ -43,7 +43,7 @@ and open the template in the editor.
         </div>
         <div id="divSetup" style="display:none; background-color: #FFF">
             <h1 style="text-align: center">FTARS Setup</h1>
-            <form class="anuform">
+            <form id="frmFieldTrip" class="anuform">
                 <fieldset>
                     <legend>Field Trip Settings</legend>
                     <label for="x_faasdate"><strong>Start Date</strong></label>
@@ -60,6 +60,7 @@ and open the template in the editor.
                 </fieldset>
             </form>
             <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divSetup', 'content')">
+            <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updFaa(); divToggle('divSetup', 'content')">
         </div>
         <div id="divListSpecimens" style="display:none">
             <h1 style="text-align: center">FTARS Specimen List</h1>
@@ -94,6 +95,26 @@ and open the template in the editor.
                 </fieldset>
                 <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divAddSpecies', 'divSetupSpecies')">
                 <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="insFab(); divToggle('divAddSpecies', 'divSetupSpecies')">
+            </form>
+        </div>
+        <div id="divEditSpecies" style="display:none">
+            <h1 style="text-align: center">Edit a species</h1>
+            <form id="frmEditSpecies" class="anuform">
+                <input type="hidden" id="x_fabcode" name="x_fabcode"/>
+                <fieldset>
+                    <legend>Edit a species</legend>
+                    <label for="x_fababbr"><strong>Abbreviation</strong></label>
+                    <input type="text" class="text" id="x_fababbr" name="x_fababbr" maxlength="16"/>
+                    <br />
+                    <label for="x_fabname"><strong>Name</strong></label>
+                    <input type="text" class="dates" id="x_fabname" name="x_fabname" maxlength="64" value=""/>
+                    <br />
+                    <label><strong>Default?</strong></label>
+                    Yes&nbsp;<input type="radio"  name="x_fabdefault" value="Y"/>
+                    No&nbsp;<input type="radio"  name="x_fabdefault" value="N"/>
+                </fieldset>
+                <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divEditSpecies', 'divSetupSpecies')">
+                <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updFab(); divToggle('divEditSpecies', 'divSetupSpecies')">
             </form>
         </div>
     </body>
