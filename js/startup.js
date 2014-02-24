@@ -59,7 +59,26 @@ $(document).ready(function(){
 //           tx.executeSql('DELETE FROM fabspe', nullData, errorHandler) ;
 //        });
         
+        /* Create table FACATR = attribute definitions */
+        db.transaction(function(tx) {
+           tx.executeSql('CREATE TABLE IF NOT EXISTS facatr ('
+                       + 'faccode INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,'
+                       + 'facabbr VARCHAR(16),'
+                       + 'facname VARCHAR(64));',
+                       [], nullData, errorHandler);
+           //tx.executeSql('DELETE FROM facatr', nullData, errorHandler);
+        });
+
         
+        /* Create table FADGRP = group definitions */
+        db.transaction(function(tx) {
+           tx.executeSql('CREATE TABLE IF NOT EXISTS fadgrp ('
+                       + 'fadcode INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,'
+                       + 'fadabbr VARCHAR(16),'
+                       + 'fadname VARCHAR(64));',
+                       [], nullData, errorHandler);
+        });
+
         /* Get the number of records in the FAA table
          * If none exist, then create one with the code of one
          */

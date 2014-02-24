@@ -14,6 +14,8 @@ and open the template in the editor.
         <script src="js/startup.js"></script>
         <script src="js/db_faa.js"></script>
         <script src="js/db_fab.js"></script>
+        <script src="js/db_fac.js"></script>
+        <script src="js/db_fad.js"></script>
         <script>
             function showMain() {
                 $(function() {
@@ -30,6 +32,10 @@ and open the template in the editor.
                     getFaa();
                 if (x_on === "divSetupSpecies")
                     getFab();
+                if (x_on === "divListAttr")
+                    getFac();
+                if (x_on === "divListGp")
+                    getFad();
             }
         </script>
     </head>
@@ -38,8 +44,10 @@ and open the template in the editor.
             <h1 style="text-align: center">Field Trip</h1>
             <h2 style="text-align: center">Attribute Recording</h2>
             <input class="btn-uni-grad btn-xlarge" style="width: 100%" type="button" value="Setup" onClick="divToggle('content', 'divSetup');">
-            <input class="btn-uni-grad btn-xlarge" style="width: 100%" type="button" value="Define Species" onClick="divToggle('content', 'divSetupSpecies');">
-            <input class="btn-uni-grad btn-xlarge" style="width: 100%" type="button" value="View Specimens" onClick="divToggle('content', 'divListSpecimens');">
+            <input class="btn-uni-grad btn-xlarge" style="width: 48%" type="button" value="View Species" onClick="divToggle('content', 'divSetupSpecies');">
+            <input class="btn-uni-grad btn-xlarge" style="width: 48%" type="button" value="View Specimens *" onClick="divToggle('content', 'divListSpecimens');">
+            <input class="btn-uni-grad btn-xlarge" style="width: 48%" type="button" value="View Attributes" onClick="divToggle('content', 'divListAttr');">
+            <input class="btn-uni-grad btn-xlarge" style="width: 48%" type="button" value="View Groups" onClick="divToggle('content', 'divListGp');">
         </div>
         <div id="divSetup" style="display:none; background-color: #FFF">
             <h1 style="text-align: center">FTARS Setup</h1>
@@ -66,6 +74,12 @@ and open the template in the editor.
             <h1 style="text-align: center">FTARS Specimen List</h1>
             <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divListSpecimens', 'content')">
         </div>
+        
+        <!--
+        *
+        * Species definition
+        *
+        -->
         <div id="divSetupSpecies" style="display:none">
             <h1 style="text-align: center">FTARS Species List</h1>
             <input class="btn-uni-grad btn-medium" type="button" value="Add a species" onClick="divToggle('divSetupSpecies', 'divAddSpecies')">
@@ -115,6 +129,102 @@ and open the template in the editor.
                 </fieldset>
                 <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divEditSpecies', 'divSetupSpecies')">
                 <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updFab(); divToggle('divEditSpecies', 'divSetupSpecies')">
+            </form>
+        </div>
+        
+        <!--
+        *
+        * Attribute definition
+        *
+        -->
+        <div id="divListAttr" style="display:none">
+            <h1 style="text-align: center">FTARS Attribute List</h1>
+            <input class="btn-uni-grad btn-medium" type="button" value="Add an attribute" onClick="divToggle('divListAttr', 'divAddAttr')"/>
+            <table id="tbl_attr_list" class="fullwidth">
+               <tr>
+                    <th>Abbr</th>
+                    <th>Name</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </table>
+            <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divListAttr', 'content')"/>
+        </div>
+        <div id="divAddAttr" style="display:none">
+            <h1 style="text-align: center">Add an attribute</h1>
+            <form id="frmAddAttr" class="anuform">
+                <fieldset>
+                    <legend>Add a new attribute</legend>
+                    <label for="x_facabbr"><strong>Abbreviation</strong></label>
+                    <input type="text" class="text" id="x_facabbr" name="x_facabbr" maxlength="16"/>
+                    <br />
+                    <label for="x_facname"><strong>Name</strong></label>
+                    <input type="text" class="text" id="x_facname" name="x_facname" maxlength="64" value=""/>
+                </fieldset>
+                <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divAddAttr', 'divListAttr')">
+                <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="insFac(); divToggle('divAddAttr', 'divListAttr')">
+            </form>
+        </div>
+        <div id="divEditAttr" style="display:none">
+            <h1 style="text-align: center">Edit an attribute</h1>
+            <form id="frmEditAttr" class="anuform">
+                <input type="hidden" id="x_faccode" name="x_faccode"/>
+                <fieldset>
+                    <legend>Edit an attribute</legend>
+                    <label for="x_facabbr"><strong>Abbreviation</strong></label>
+                    <input type="text" class="text" id="x_facabbr" name="x_facabbr" maxlength="16"/>
+                    <br />
+                    <label for="x_facname"><strong>Name</strong></label>
+                    <input type="text" class="text" id="x_facname" name="x_facname" maxlength="64" value=""/>
+                </fieldset>
+                <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divEditAttr', 'divListAttr')">
+                <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updFac(); divToggle('divEditAttr', 'divListAttr')">
+            </form>
+        </div>
+        
+        
+        <!--
+        *
+        * Group definition
+        *
+        -->
+        
+        
+        <div id="divListGp" style="display:none">
+            <h1 style="text-align: center">FTARS Group List</h1>
+            <input class="btn-uni-grad btn-medium" type="button" value="Add a group" onClick="divToggle('divListGp', 'divAddGp')">
+            <table id="tbl_gp_list" class="fullwidth">
+            </table>
+            <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divListGp', 'content')">
+        </div>
+        <div id="divAddGp" style="display:none">
+            <h1 style="text-align: center">Add a group</h1>
+            <form id="frmAddGp" class="anuform">
+                <fieldset>
+                    <legend>Add a new group</legend>
+                    <label for="x_fadabbr"><strong>Abbreviation</strong></label>
+                    <input type="text" class="text" id="x_fadabbr" name="x_fadabbr" maxlength="16"/>
+                    <br />
+                    <label for="x_fadname"><strong>Name</strong></label>
+                    <input type="text" class="text" id="x_fadname" name="x_fadname" maxlength="64" value=""/>
+                </fieldset>
+                <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divAddGp', 'divListGp')">
+                <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="insFad(); divToggle('divAddGp', 'divListGp')">
+            </form>
+        </div>
+        <div id="divEditGp" style="display:none">
+            <h1 style="text-align: center">Edit a group</h1>
+            <form id="frmEditGp" class="anuform">
+                <input type="hidden" id="x_fadcode" name="x_fadcode"/>
+                <fieldset>
+                    <legend>Edit a group</legend>
+                    <label for="x_fadabbr"><strong>Abbreviation</strong></label>
+                    <input type="text" class="text" id="x_fadabbr" name="x_fadabbr" maxlength="16"/>
+                    <br />
+                    <label for="x_fadname"><strong>Name</strong></label>
+                    <input type="text" class="text" id="x_fadname" name="x_fadname" maxlength="64" value=""/>
+                </fieldset>
+                <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divEditGp', 'divListGp')">
+                <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updFad(); divToggle('divEditGp', 'divListGp')">
             </form>
         </div>
     </body>
