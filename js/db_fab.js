@@ -15,9 +15,11 @@ function editSpecies(x_fabcode) {
                          if (v_results.rows.item(0).fabdefault === "Y") {
                             $("input:radio[name=x_fabdefault]:nth(0)", "#frmEditSpecies").prop('checked', true);
                             $("input:radio[name=x_fabdefault]:nth(1)", "#frmEditSpecies").prop('checked', false);
+                            $("input:radio").checkboxradio("refresh");
                          } else {
                             $("input:radio[name=x_fabdefault]:nth(0)", "#frmEditSpecies").prop('checked', false);
                             $("input:radio[name=x_fabdefault]:nth(1)", "#frmEditSpecies").prop('checked', true);
+                            $("input:radio").checkboxradio("refresh");
                         }
                      },
                      errorHandler);

@@ -45,7 +45,7 @@ and open the template in the editor.
         <div id="content">
             <h1 style="text-align: center">Field Trip</h1>
             <h2 style="text-align: center">Attribute Recording</h2>
-            <input class="btn-uni-grad btn-xlarge" style="width: 100%" type="button" value="Setup" onClick="divToggle('content', 'divSetup');">
+            <input class="btn-uni-grad btn-xlarge" style="width: 97%" type="button" value="Setup" onClick="divToggle('content', 'divSetup');">
             <input class="btn-uni-grad btn-xlarge" style="width: 48%" type="button" value="View Species" onClick="divToggle('content', 'divSetupSpecies');">
             <input class="btn-uni-grad btn-xlarge" style="width: 48%" type="button" value="View Specimens *" onClick="divToggle('content', 'divListSpecimens');">
             <input class="btn-uni-grad btn-xlarge" style="width: 48%" type="button" value="View Attributes" onClick="divToggle('content', 'divListAttr');">
@@ -105,9 +105,13 @@ and open the template in the editor.
                     <label for="x_fabname"><strong>Name</strong></label>
                     <input type="text" class="dates" id="x_fabname" name="x_fabname" maxlength="64" value=""/>
                     <br />
-                    <label><strong>Default?</strong></label>
-                    Yes&nbsp;<input type="radio" id="x_fabdefault_Y" name="x_fabdefault" value="Y"/>
-                    No&nbsp;<input type="radio" id="x_fabdefault_N" name="x_fabdefault" value="N" checked="checked"/>
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <legend>Default</legend>
+                        <input type="radio" id="x_fabdefault_Y" name="x_fabdefault" value="Y"/>
+                        <label for="x_fabdefault_Y">Yes</label>
+                        <input type="radio" id="x_fabdefault_N" name="x_fabdefault" value="N" checked="checked"/>
+                        <label for="x_fabdefault_N">No</label>
+                    </fieldset>
                 </fieldset>
                 <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divAddSpecies', 'divSetupSpecies')">
                 <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="insFab(); divToggle('divAddSpecies', 'divSetupSpecies')">
@@ -125,9 +129,13 @@ and open the template in the editor.
                     <label for="x_fabname"><strong>Name</strong></label>
                     <input type="text" class="dates" id="x_fabname" name="x_fabname" maxlength="64" value=""/>
                     <br />
-                    <label><strong>Default?</strong></label>
-                    Yes&nbsp;<input type="radio"  name="x_fabdefault" value="Y"/>
-                    No&nbsp;<input type="radio"  name="x_fabdefault" value="N"/>
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <legend>Default</legend>
+                        <input type="radio" name="x_fabdefault" id="x_edtfabdefault_Y" value="Y"/>
+                        <label for="x_edtfabdefault_Y">Yes</label>
+                        <input type="radio" name="x_fabdefault" id="x_edtfabdefault_N" value="N"/>
+                        <label for="x_edtfabdefault_N">No</label>
+                    </fieldset>
                 </fieldset>
                 <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divEditSpecies', 'divSetupSpecies')">
                 <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updFab(); divToggle('divEditSpecies', 'divSetupSpecies')">
