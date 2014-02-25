@@ -10,9 +10,9 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <link href="css/anustyle.css" rel="stylesheet" type="text/css" media="screen">
-        <link href="css/jquery.mobile-1.4.1.min.css" rel="stylesheet" type="text/css">
+        <link href="css/jquery.mobile-1.4.1.css" rel="stylesheet" type="text/css">
         <script src="js/libs/jquery/jquery.js"></script>
-        <script src="js/jquery.mobile-1.4.1.min.js"></script>
+        <script src="js/jquery.mobile-1.4.1.js"></script>
         <script src="js/startup.js"></script>
         <script src="js/db_faa.js"></script>
         <script src="js/db_fab.js"></script>
@@ -237,5 +237,18 @@ and open the template in the editor.
                 <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updFad(); divToggle('divEditGp', 'divListGp')">
             </form>
         </div>
+        <div id="divGpAttr" style="display:none">
+            <h1 style="text-align: center">FTARS Link attributes to groups</h1>
+            <form>
+            <input id="x_fadname" type="text" disabled/>
+				<table id="tbl_link_attr" class="fullwidth">
+				<tbody>
+				</tbody>
+		        </table>            
+            <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updFba(); divToggle('divGpAttr', 'divListGp')">
+            <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divGpAttr', 'divListGp')">
+            </form>
+        </div>
+
     </body>
 </html>

@@ -78,6 +78,15 @@ $(document).ready(function(){
                        + 'fadname VARCHAR(64));',
                        [], nullData, errorHandler);
         });
+        
+        /* Create table FBAGRP = group attribute links */
+        db.transaction(function(tx) {
+            tx.executeSql("CREATE TABLE IF NOT EXISTS fbagpa ("
+                        + "fbacode INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+                        + "fbagroupcode INTEGER NOT NULL, "
+                        + "fbaattrcode INTEGER NOT NULL);",
+                        [], nullData, errorHandler);
+        });
 
         /* Get the number of records in the FAA table
          * If none exist, then create one with the code of one

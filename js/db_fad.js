@@ -16,6 +16,60 @@ function editGp(x_fadcode) {
     });
 }
 
+function editGpAttr(x_fadcode) {
+    $("#divListGp").hide();
+    $("#divGpAttr").show();
+
+
+    // Get the group details
+    $("#divGpAttr #tbl_link_attr").empty();
+    db.transaction(function(tx) {
+       tx.executeSql('SELECT * FROM fadgrp WHERE fadcode = ?', [x_fadcode],
+                     function(tx, v_results) {
+                         $("#divGpAttr #x_fadname").val(v_results.rows.item(0).fadname);
+                     },
+                     errorHandler);
+                     
+        // Get all the existing group attribute records
+        tx.executeSql('SELECT faccode, facname FROM fbagpa, facatr '
+                    + 'WHERE fbagroupcode = ? '
+                    + 'AND faccode = fbaattrcode', [x_fadcode],
+                    function(tx, v_results) {
+                        var v_rowcount = v_results.rows.length;
+                        $("<tr><th>Attribute</th><th>Link?</th></tr>").appendTo("#divGpAttr #tbl_link_attr");
+                        for (v_count = 0; v_count < v_rowcount; v_count ++) {
+                            v_trdata = "<tr><td>" 
+                                    + "<input type=hidden name=x_faccode value='"+v_results.rows.item(v_count).faccode + "'/>"
+                                    + v_results.rows.item(v_count).facname + "</td>";
+                            v_trdata += "<td>";
+                            v_trdata += "<input type=checkbox data-role=flipswitch id='flip-checkbox-b'"+v_count+"' name='flip-checkbox-b' data-on-text='Yes' data-off-text='No'>"
+                            v_trdata += "</td>";
+                            v_trdata += "</tr>";
+                            $(v_trdata).appendTo("#divGpAttr #tbl_link_attr");
+                        }
+                    },
+                    errorHandler);
+        // Get the rest of the attribute records that are not yet linked
+        tx.executeSql('SELECT faccode, facname FROM facatr WHERE faccode NOT IN (SELECT fbaattrcode FROM fbagpa WHERE fbagroupcode = ?)', [x_fadcode],
+                    function(tx, v_results) {
+                        var v_rowcount = v_results.rows.length;
+                        for (v_count = 0; v_count < v_rowcount; v_count ++) {
+                            v_trdata = "<tr><td>"
+                                    + "<input type=hidden name=x_faccode value='"+v_results.rows.item(v_count).faccode + "'/>"
+                                    + v_results.rows.item(v_count).facname + "</td>"
+                            v_trdata += '<td>';
+                            v_trdata += '<input type=checkbox data-role=flipswitch id="flip-checkbox-a'+v_count+'" name="flip-checkbox-a" data-on-text="Yes" data-off-text="No"/>';
+                            v_trdata += '</td>';
+                            v_trdata += '</tr>';
+                            $(v_trdata).appendTo("#tbl_link_attr").trigger("create");
+                        }
+                    }, errorHandler);
+
+
+    });
+    
+}
+
 function insFad() {
     var x_fadabbr = $("#frmAddGp #x_fadabbr").val();
     var x_fadname = $("#frmAddGp #x_fadname").val();
