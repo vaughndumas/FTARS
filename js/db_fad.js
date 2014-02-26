@@ -29,7 +29,8 @@ function editGpAttr(x_fadcode) {
                          $("#divGpAttr #x_fadname").val(v_results.rows.item(0).fadname);
                      },
                      errorHandler);
-                     
+        
+        $("#divGpAttr #x_fbagroupcode").val(x_fadcode);
         // Get all the existing group attribute records
         tx.executeSql('SELECT faccode, facname FROM fbagpa, facatr '
                     + 'WHERE fbagroupcode = ? '
@@ -42,10 +43,10 @@ function editGpAttr(x_fadcode) {
                                     + "<input type=hidden name=x_faccode value='"+v_results.rows.item(v_count).faccode + "'/>"
                                     + v_results.rows.item(v_count).facname + "</td>";
                             v_trdata += "<td>";
-                            v_trdata += "<input type=checkbox data-role=flipswitch id='flip-checkbox-b'"+v_count+"' name='flip-checkbox-b' data-on-text='Yes' data-off-text='No'>"
+                            v_trdata += "<input type=checkbox data-role=flipswitch id='flip-checkbox-b'"+v_count+"' name='flip-checkbox-b' data-on-text='Yes' data-off-text='No' checked=''>"
                             v_trdata += "</td>";
                             v_trdata += "</tr>";
-                            $(v_trdata).appendTo("#divGpAttr #tbl_link_attr");
+                            $(v_trdata).appendTo("#tbl_link_attr").trigger("create");
                         }
                     },
                     errorHandler);
@@ -68,6 +69,31 @@ function editGpAttr(x_fadcode) {
 
     });
     
+}
+
+function updGpAttr() {
+    var v_attrcode = '';
+    var v_groupcode = $("#divGpAttr #x_fbagroupcode").val();
+    db.transaction(function(tx) {
+       // Remove existing values for this group
+       tx.executeSql('DELETE FROM fbagpa WHERE fbagroupcode = ?', [v_groupcode], nullData, errorHandler);
+       // before inserting new ones.
+       $("#divGpAttr #tbl_link_attr tr").each(function(v_count_tr) {
+          v_attrcode = '';
+          $(this).children("td").each(function() {
+            // Second TD is a div
+            $(this).children("input").each(function() {
+               v_attrcode = $(this).attr("value"); 
+            });
+            $(this).children("div .ui-flipswitch-active").each(function() {
+//                alert("Row " + v_count_tr + " for attribute " + v_attrcode + " has been selected:" + $(this).prop("class"));
+                // Insert this combination into fbagpa
+                tx.executeSql('INSERT INTO fbagpa (fbagroupcode, fbaattrcode) '
+                            + ' VALUES (?, ?)', [v_groupcode, v_attrcode], nullData, errorHandler);
+            });
+          });
+       });
+    });
 }
 
 function insFad() {

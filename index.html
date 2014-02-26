@@ -45,11 +45,11 @@ and open the template in the editor.
         <div id="content">
             <h1 style="text-align: center">Field Trip</h1>
             <h2 style="text-align: center">Attribute Recording</h2>
-            <input class="btn-uni-grad btn-xlarge" style="width: 97%" type="button" value="Setup" onClick="divToggle('content', 'divSetup');">
-            <input class="btn-uni-grad btn-xlarge" style="width: 48%" type="button" value="View Species" onClick="divToggle('content', 'divSetupSpecies');">
-            <input class="btn-uni-grad btn-xlarge" style="width: 48%" type="button" value="View Specimens *" onClick="divToggle('content', 'divListSpecimens');">
-            <input class="btn-uni-grad btn-xlarge" style="width: 48%" type="button" value="View Attributes" onClick="divToggle('content', 'divListAttr');">
-            <input class="btn-uni-grad btn-xlarge" style="width: 48%" type="button" value="View Groups" onClick="divToggle('content', 'divListGp');">
+            <input class="btn-uni-grad btn-xlarge" type="button" value="Setup" onClick="divToggle('content', 'divSetup');">
+            <input class="btn-uni-grad btn-xlarge" type="button" value="View Species" onClick="divToggle('content', 'divSetupSpecies');">
+            <input class="btn-uni-grad btn-xlarge" type="button" value="View Specimens *" onClick="divToggle('content', 'divListSpecimens');">
+            <input class="btn-uni-grad btn-xlarge" type="button" value="View Attributes" onClick="divToggle('content', 'divListAttr');">
+            <input class="btn-uni-grad btn-xlarge" type="button" value="View Groups" onClick="divToggle('content', 'divListGp');">
         </div>
         <div id="divSetup" style="display:none; background-color: #FFF">
             <h1 style="text-align: center">FTARS Setup</h1>
@@ -241,11 +241,12 @@ and open the template in the editor.
             <h1 style="text-align: center">FTARS Link attributes to groups</h1>
             <form>
             <input id="x_fadname" type="text" disabled/>
+            <input type="hidden" name="x_fbagroupcode" id="x_fbagroupcode"/>
 				<table id="tbl_link_attr" class="fullwidth">
 				<tbody>
 				</tbody>
 		        </table>            
-            <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updFba(); divToggle('divGpAttr', 'divListGp')">
+            <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updGpAttr(); divToggle('divGpAttr', 'divListGp')">
             <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divGpAttr', 'divListGp')">
             </form>
         </div>
