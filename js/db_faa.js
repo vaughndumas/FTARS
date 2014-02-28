@@ -12,7 +12,7 @@ function getFaa() {
                          $("#frmFieldTrip #x_faadesc").val(v_results.rows.item(0).faadesc);
                          $("#frmFieldTrip #x_faaarea").val(v_results.rows.item(0).faaarea);
                      },
-                     errorHandler);
+                     errorHandler2);
     });
 }
 
@@ -23,7 +23,7 @@ function updFaa() {
     v_faaarea = $("#frmFieldTrip #x_faaarea").val();
     db.transaction(function(tx) {
        tx.executeSql('UPDATE faaftp SET faasdate = ?, faaedate = ?, faadesc = ?, faaarea = ?',
-                     [v_faasdate, v_faaedate, v_faadesc, v_faaarea], nullData, errorHandler); 
+                     [v_faasdate, v_faaedate, v_faadesc, v_faaarea], nullData, errorHandler2); 
     });
 }
 
@@ -32,6 +32,13 @@ function updFaa() {
 /////
 function errorHandler(transaction, error) {
     var v_errmsg = 'Error: ' + error.message;
+    v_errmsg += ' Code ';
+    v_errmsg += error.code;
+    console.log(v_errmsg);
+}
+
+function errorHandler2(transaction, error) {
+    var v_errmsg = 'eH2: Error: ' + error.message;
     v_errmsg += ' Code ';
     v_errmsg += error.code;
     console.log(v_errmsg);

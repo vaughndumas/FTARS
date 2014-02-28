@@ -18,6 +18,8 @@ and open the template in the editor.
         <script src="js/db_fab.js"></script>
         <script src="js/db_fac.js"></script>
         <script src="js/db_fad.js"></script>
+        <script src="js/db_fae.js"></script>
+        <script src="js/db_fbb.js"></script>
         <script>
             function showMain() {
                 $(function() {
@@ -32,12 +34,16 @@ and open the template in the editor.
                 });
                 if (x_on === "divSetup")
                     getFaa();
-                if (x_on === "divSetupSpecies")
+                else if (x_on === "divSetupSpecies")
                     getFab();
-                if (x_on === "divListAttr")
+                else if (x_on === "divListAttr")
                     getFac();
-                if (x_on === "divListGp")
+                else if (x_on === "divListGp")
                     getFad();
+                else if (x_on === "divAddSpm")
+                    getFae();
+                else if (x_on === "divListSpecimens")
+                    listFae();
             }
         </script>
     </head>
@@ -47,7 +53,7 @@ and open the template in the editor.
             <h2 style="text-align: center">Attribute Recording</h2>
             <input class="btn-uni-grad btn-xlarge" type="button" value="Setup" onClick="divToggle('content', 'divSetup');">
             <input class="btn-uni-grad btn-xlarge" type="button" value="View Species" onClick="divToggle('content', 'divSetupSpecies');">
-            <input class="btn-uni-grad btn-xlarge" type="button" value="View Specimens *" onClick="divToggle('content', 'divListSpecimens');">
+            <input class="btn-uni-grad btn-xlarge" type="button" value="View Specimens" onClick="divToggle('content', 'divListSpecimens');">
             <input class="btn-uni-grad btn-xlarge" type="button" value="View Attributes" onClick="divToggle('content', 'divListAttr');">
             <input class="btn-uni-grad btn-xlarge" type="button" value="View Groups" onClick="divToggle('content', 'divListGp');">
         </div>
@@ -72,11 +78,60 @@ and open the template in the editor.
             <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divSetup', 'content')">
             <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updFaa(); divToggle('divSetup', 'content')">
         </div>
+        
+        <!--
+        *
+        * Specimen definition
+        *
+        -->
         <div id="divListSpecimens" style="display:none">
             <h1 style="text-align: center">FTARS Specimen List</h1>
+            <input class="btn-uni-grad btn-medium" type="button" value="Add a specimen" onClick="divToggle('divListSpecimens', 'divAddSpm')"/>
+            <table id="tbl_spm_list" class="fullwidth">
+               <tr>
+                    <th>Sequence</th>
+                    <th>Species</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </table>
             <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divListSpecimens', 'content')">
         </div>
-        
+        <div id="divAddSpm" style="display:none">
+            <h1 style="text-align: center">Add a specimen</h1>
+            <form id="frmAddSpm" class="anuform">
+                <fieldset>
+                    <legend>Add a new specimen</legend>
+                    <label for="x_faeseq"><strong>Sequence</strong></label>
+                    <input type="text" class="text" id="x_faeseq" name="x_faeseq" maxlength="8"/>
+                    <br />
+                    <div class="ui-field-contain">
+                    <label for="x_faespecies">Species</label>
+                    <select name="x_faespecies" id="x_faespecies"></select>
+                    </div>
+                </fieldset>
+                <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="insFae(); divToggle('divAddSpm', 'divListSpecimens')">
+                <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divAddSpm', 'divListSpecimens')">
+            </form>
+        </div>
+        <div id="divEditSpm" style="display:none">
+            <h1 style="text-align: center">Edit a specimen</h1>
+            <form id="frmEditSpm" class="anuform">
+                <input type="hidden" id="x_faecode" name="x_faecode"/>
+                <fieldset>
+                    <legend>Edit a specimen</legend>
+                    <label for="x_faeseq">Sequence</label>
+                    <input type="text" class="text" id="x_faeseq" name="x_faeseq" maxlength="8"/>
+                    <br />
+                    <div class="ui-field-contain">
+                    <label for="x_faespecies">Species</label>
+                    <select name="x_faespecies" id="x_faespecies"></select>
+                    </div>
+                </fieldset>
+                <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updFae(); divToggle('divEditSpm', 'divListSpecimens')">
+                <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divEditSpm', 'divListSpecimens')">
+            </form>
+        </div>
+
         <!--
         *
         * Species definition
@@ -139,6 +194,19 @@ and open the template in the editor.
                 </fieldset>
                 <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divEditSpecies', 'divSetupSpecies')">
                 <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updFab(); divToggle('divEditSpecies', 'divSetupSpecies')">
+            </form>
+        </div>
+        <div id="divSpeciesGp" style="display:none">
+            <h1 style="text-align: center">FTARS Link groups to species</h1>
+            <form>
+            <input id="x_fabname" type="text" disabled/>
+            <input type="hidden" name="x_fbbspecies" id="x_fbbspecies"/>
+				<table id="tbl_link_spegp" class="fullwidth">
+				<tbody>
+				</tbody>
+		        </table>            
+            <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updSpeGp(); divToggle('divSpeciesGp', 'divSetupSpecies')">
+            <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divSpeciesGp', 'divSetupSpecies')">
             </form>
         </div>
         

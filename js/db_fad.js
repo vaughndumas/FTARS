@@ -43,7 +43,7 @@ function editGpAttr(x_fadcode) {
                                     + "<input type=hidden name=x_faccode value='"+v_results.rows.item(v_count).faccode + "'/>"
                                     + v_results.rows.item(v_count).facname + "</td>";
                             v_trdata += "<td>";
-                            v_trdata += "<input type=checkbox data-role=flipswitch id='flip-checkbox-b'"+v_count+"' name='flip-checkbox-b' data-on-text='Yes' data-off-text='No' checked=''>"
+                            v_trdata += "<input type=checkbox data-role=flipswitch id='flip-checkbox-b'"+v_count+"' name='flip-checkbox-b' data-on-text='Yes' data-off-text='No' checked=''>";
                             v_trdata += "</td>";
                             v_trdata += "</tr>";
                             $(v_trdata).appendTo("#tbl_link_attr").trigger("create");

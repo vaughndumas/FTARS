@@ -71,7 +71,7 @@ function getFab() {
                          var v_rowcount = v_results.rows.length; 
                          for (v_count = 0; v_count < v_rowcount; v_count ++) {
                             if (v_count == 0) {
-                               v_trdata = "<tr><th>Abbr</th><th>Name</th><th>&nbsp;</th></tr>";
+                               v_trdata = "<tr><th>Abbr</th><th>Name</th><th>&nbsp;</th><th>&nbsp;</th></tr>";
                                $(v_trdata).appendTo("#divSetupSpecies #tbl_species_list");
                             }
                             v_trdata = "<tr><td>" + v_results.rows.item(v_count).fababbr + "</td>";
@@ -79,7 +79,8 @@ function getFab() {
                                 v_trdata += "<td><span style='background: #00FF00'>&nbsp;</span>" + v_results.rows.item(v_count).fabname + "</td>";
                             else
                                 v_trdata += "<td>" + v_results.rows.item(v_count).fabname + "</td>";
-                            v_trdata += "<td><input class='btn-uni-grad btn-small' type=\"button\" value=\"Edit\" onClick=\"editSpecies("+v_results.rows.item(v_count).fabcode+");\"/></td>";
+                            v_trdata += "<td><button class=\"ui-button ui-btn-inline\" onClick=\"editSpecies("+v_results.rows.item(v_count).fabcode+");\">Edit</button></td>";
+                            v_trdata += "<td><button class=\"ui-button ui-btn-inline\" onClick=\"editFbb("+v_results.rows.item(v_count).fabcode+");\">Link Groups</button></td>";
                             v_trdata += "</tr>";
                             $(v_trdata).appendTo("#divSetupSpecies #tbl_species_list");
                          }
