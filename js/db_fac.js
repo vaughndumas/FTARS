@@ -2,6 +2,11 @@ if(openDatabase){
         db = openDatabase('ftars_jb' , '1.0' , 'FTARS Jervis Bay' , 2 * 1024 * 1024);
 };
 
+function addAttr() {
+    $("#divAddAttr #frmAddAttr #x_facabbr").val("");
+    $("#divAddAttr #frmAddAttr #x_facname").val("");
+}
+
 function editAttr(x_faccode) {
     $("#divListAttr").hide();
     $("#divEditAttr").show();

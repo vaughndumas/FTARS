@@ -231,7 +231,7 @@ and open the template in the editor.
         -->
         <div id="divListAttr" style="display:none">
             <h1 style="text-align: center">FTARS Attribute List</h1>
-            <button class="ui-button ui-btn-inline" onClick="divToggle('divListAttr', 'divAddAttr'); return false;">Add an attribute</button>
+            <button class="ui-button ui-btn-inline" onClick="addAttr(); divToggle('divListAttr', 'divAddAttr'); return false;">Add an attribute</button>
             <table id="tbl_attr_list" class="fullwidth">
                <tr>
                     <th>Abbr</th>
@@ -247,10 +247,10 @@ and open the template in the editor.
                 <fieldset>
                     <legend>Add a new attribute</legend>
                     <label for="x_facabbr"><strong>Abbreviation</strong></label>
-                    <input type="text" class="text" id="x_facabbr" name="x_facabbr" maxlength="16"/>
+                    <input type="text" id="x_facabbr" name="x_facabbr" maxlength="16" value=""/>
                     <br />
                     <label for="x_facname"><strong>Name</strong></label>
-                    <input type="text" class="text" id="x_facname" name="x_facname" maxlength="64" value=""/>
+                    <input type="text" id="x_facname" name="x_facname" maxlength="64" value=""/>
                 </fieldset>
                 <button class="ui-button ui-btn-inline" onClick="insFac(); divToggle('divAddAttr', 'divListAttr'); return false;">Save</button>
                 <button class="ui-button ui-btn-inline" onClick="divToggle('divAddAttr', 'divListAttr'); return false;">Back</button>
@@ -283,7 +283,7 @@ and open the template in the editor.
         
         <div id="divListGp" style="display:none">
             <h1 style="text-align: center">FTARS Group List</h1>
-            <button class="ui-button ui-btn-inline" onClick="divToggle('divListGp', 'divAddGp'); return false;">Add a group</button>
+            <button class="ui-button ui-btn-inline" onClick="addGp(); divToggle('divListGp', 'divAddGp'); return false;">Add a group</button>
             <table id="tbl_gp_list" class="fullwidth">
             </table>
             <button class="ui-button ui-btn-inline" onClick="divToggle('divListGp', 'content'); return false;">Back</button>

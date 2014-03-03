@@ -182,9 +182,10 @@ function updSpeGp() {
                                         // Check if this record (A) exists in the array
                                         var v_found = 0;
                                         for (v_c = 0; v_c < v_fbc_arr.length; v_c ++) {
-                                            if ((v_fbc_arr[v_c][1] == v_faecode_ins) &&
-                                                (v_fbc_arr[v_c][2] == v_fbaattrcode_ins) &&
-                                                (v_fbc_arr[v_c][4] == "A") ) {
+                                            if ((v_fbc_arr[v_c][1] === v_faecode_ins) &&
+                                                (v_fbc_arr[v_c][2] === v_fbaattrcode_ins) &&
+                                                (v_fbc_arr[v_c][0] === v_fbcheader) &&
+                                                (v_fbc_arr[v_c][4] === "A") ) {
                                                     v_found ++;
                                             }
                                         }

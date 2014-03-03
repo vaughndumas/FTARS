@@ -117,7 +117,7 @@ $(document).ready(function(){
                         + "fbcdispans CHAR(1), "
                         + "fbcans VARCHAR(64));",
                         [], nullData, errorHandler_startup);
-            tx.executeSql('DELETE FROM fbcsfa', errorHandler2);
+//            tx.executeSql('DELETE FROM fbcsfa', errorHandler2);
 //            tx.executeSql('INSERT INTO fbcsfa (fbcheader, fbcspecimencode, fbcattrcode, fbcattrtitle, fbcdispans, fbcans) '
 //                    + ' values (?,?,?,?,?, null)',["Test Group (tstgp)", 4, 8, "Terrain info", "A"], errorHandler);
         });
