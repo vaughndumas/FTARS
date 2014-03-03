@@ -20,6 +20,7 @@ and open the template in the editor.
         <script src="js/db_fad.js"></script>
         <script src="js/db_fae.js"></script>
         <script src="js/db_fbb.js"></script>
+        <script src="js/ftars001.js"></script>
         <script>
             function showMain() {
                 $(function() {
@@ -44,6 +45,7 @@ and open the template in the editor.
                     getFae();
                 else if (x_on === "divListSpecimens")
                     listFae();
+                
             }
         </script>
     </head>
@@ -51,32 +53,32 @@ and open the template in the editor.
         <div id="content">
             <h1 style="text-align: center">Field Trip</h1>
             <h2 style="text-align: center">Attribute Recording</h2>
-            <input class="btn-uni-grad btn-xlarge" type="button" value="Setup" onClick="divToggle('content', 'divSetup');">
-            <input class="btn-uni-grad btn-xlarge" type="button" value="View Species" onClick="divToggle('content', 'divSetupSpecies');">
-            <input class="btn-uni-grad btn-xlarge" type="button" value="View Specimens" onClick="divToggle('content', 'divListSpecimens');">
-            <input class="btn-uni-grad btn-xlarge" type="button" value="View Attributes" onClick="divToggle('content', 'divListAttr');">
-            <input class="btn-uni-grad btn-xlarge" type="button" value="View Groups" onClick="divToggle('content', 'divListGp');">
+            <button class="ui-button ui-corner-all" onClick="divToggle('content', 'divSetup');">Setup</button>
+            <button class="ui-button ui-corner-all" onClick="divToggle('content', 'divSetupSpecies');">View Species</button>
+            <button class="ui-button ui-corner-all" onClick="divToggle('content', 'divListSpecimens');">View Specimens</button>
+            <button class="ui-button ui-corner-all" onClick="divToggle('content', 'divListAttr');">View Attributes</button>
+            <button class="ui-button ui-corner-all" onClick="divToggle('content', 'divListGp');">View Groups</button>
         </div>
         <div id="divSetup" style="display:none; background-color: #FFF">
             <h1 style="text-align: center">FTARS Setup</h1>
-            <form id="frmFieldTrip" class="anuform">
+            <form id="frmFieldTrip">
                 <fieldset>
                     <legend>Field Trip Settings</legend>
                     <label for="x_faasdate"><strong>Start Date</strong></label>
-                    <input type="date" class="dates" id="x_faasdate" name="x_faasdate"/>
+                    <input type="date" id="x_faasdate" name="x_faasdate"/>
                     <br />
                     <label for="x_faaedate"><strong>End Date</strong></label>
-                    <input type="date" class="dates" id="x_faaedate" name="x_faaedate"/>
+                    <input type="date" id="x_faaedate" name="x_faaedate"/>
                     <br />
                     <label for="x_faedesc"><strong>Description</strong></label>
-                    <textarea rows="3" cols="60" class="text" id="x_faadesc" name="x_faadesc"></textarea>
+                    <textarea rows="3" cols="60" id="x_faadesc" name="x_faadesc"></textarea>
                     <br />
                     <label for="x_faearea"><strong>Area</strong></label>
-                    <textarea rows="3" cols="60" class="text" id="x_faaarea" name="x_faaarea"></textarea>
+                    <textarea rows="3" cols="60" id="x_faaarea" name="x_faaarea"></textarea>
                 </fieldset>
             </form>
-            <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divSetup', 'content')">
-            <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updFaa(); divToggle('divSetup', 'content')">
+            <button class="ui-button ui-btn-inline" onClick="updFaa(); divToggle('divSetup', 'content'); return false;">Save</button>
+            <button class="ui-button ui-btn-inline" onClick="divToggle('divSetup', 'content'); return false;">Back</button>
         </div>
         
         <!--
@@ -86,7 +88,7 @@ and open the template in the editor.
         -->
         <div id="divListSpecimens" style="display:none">
             <h1 style="text-align: center">FTARS Specimen List</h1>
-            <input class="btn-uni-grad btn-medium" type="button" value="Add a specimen" onClick="divToggle('divListSpecimens', 'divAddSpm')"/>
+            <button class="ui-button ui-btn-inline" onClick="divToggle('divListSpecimens', 'divAddSpm');">Add a specimen</button>
             <table id="tbl_spm_list" class="fullwidth">
                <tr>
                     <th>Sequence</th>
@@ -94,28 +96,29 @@ and open the template in the editor.
                     <th>&nbsp;</th>
                 </tr>
             </table>
-            <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divListSpecimens', 'content')">
+            <button class="ui-button ui-btn-inline" onClick="divToggle('divListSpecimens', 'content'); return false;">Back</button>
         </div>
         <div id="divAddSpm" style="display:none">
             <h1 style="text-align: center">Add a specimen</h1>
-            <form id="frmAddSpm" class="anuform">
+            <form id="frmAddSpm">
                 <fieldset>
                     <legend>Add a new specimen</legend>
                     <label for="x_faeseq"><strong>Sequence</strong></label>
-                    <input type="text" class="text" id="x_faeseq" name="x_faeseq" maxlength="8"/>
+                    <input type="text" id="x_faeseq" name="x_faeseq" maxlength="8"/>
                     <br />
                     <div class="ui-field-contain">
                     <label for="x_faespecies">Species</label>
-                    <select name="x_faespecies" id="x_faespecies"></select>
+                    <select name="x_faespecies" id="x_faespecies">
+                    </select>
                     </div>
                 </fieldset>
-                <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="insFae(); divToggle('divAddSpm', 'divListSpecimens')">
-                <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divAddSpm', 'divListSpecimens')">
+                <button class="ui-button ui-btn-inline" onClick="insFae(); divToggle('divAddSpm', 'divListSpecimens'); return false;">Save</button>
+                <button class="ui-button ui-btn-inline" onClick="divToggle('divAddSpm', 'divListSpecimens'); return false;">Back</button>
             </form>
         </div>
         <div id="divEditSpm" style="display:none">
             <h1 style="text-align: center">Edit a specimen</h1>
-            <form id="frmEditSpm" class="anuform">
+            <form id="frmEditSpm">
                 <input type="hidden" id="x_faecode" name="x_faecode"/>
                 <fieldset>
                     <legend>Edit a specimen</legend>
@@ -127,9 +130,20 @@ and open the template in the editor.
                     <select name="x_faespecies" id="x_faespecies"></select>
                     </div>
                 </fieldset>
-                <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updFae(); divToggle('divEditSpm', 'divListSpecimens')">
-                <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divEditSpm', 'divListSpecimens')">
+                <button class="ui-button ui-btn-inline" onClick="updFae(); divToggle('divEditSpm', 'divListSpecimens'); return false;">Save</button>
+                <button class="ui-button ui-btn-inline" onClick="divToggle('divEditSpm', 'divListSpecimens'); return false;">Back</button>
             </form>
+        </div>
+        <div id="divRecordData" style="display:none">
+            <h1 style="text-align: center">Record specimen data</h1>
+            <form id="frmRecData">
+                <fieldset>
+                    <legend>Record attributes</legend>
+                    <table id="tbl_recdata_list" class="fullwidth"></table>
+                </fieldset>
+            </form>
+            <button class="ui-button ui-btn-inline" onClick="updRecData(); divToggle('divRecordData', 'divListSpecimens'); return false;">Save</button>
+            <button class="ui-button ui-btn-inline" onClick="divToggle('divRecordData', 'divListSpecimens'); return false;">Back</button>
         </div>
 
         <!--
@@ -139,7 +153,7 @@ and open the template in the editor.
         -->
         <div id="divSetupSpecies" style="display:none">
             <h1 style="text-align: center">FTARS Species List</h1>
-            <input class="btn-uni-grad btn-medium" type="button" value="Add a species" onClick="divToggle('divSetupSpecies', 'divAddSpecies')">
+            <button class="ui-button ui-btn-inline" onClick="divToggle('divSetupSpecies', 'divAddSpecies'); return false;">Add a species</button>
             <table id="tbl_species_list" class="fullwidth">
                 <tr>
                     <th>Abbr</th>
@@ -147,11 +161,11 @@ and open the template in the editor.
                     <th>&nbsp;</th>
                 </tr>
             </table>
-            <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divSetupSpecies', 'content')">
+            <button class="ui-button ui-btn-inline" onClick="divToggle('divSetupSpecies', 'content'); return false;">Back</button>
         </div>
         <div id="divAddSpecies" style="display:none">
             <h1 style="text-align: center">Add a species</h1>
-            <form id="frmAddSpecies" class="anuform">
+            <form id="frmAddSpecies">
                 <fieldset>
                     <legend>Add a new species</legend>
                     <label for="x_fababbr"><strong>Abbreviation</strong></label>
@@ -168,21 +182,21 @@ and open the template in the editor.
                         <label for="x_fabdefault_N">No</label>
                     </fieldset>
                 </fieldset>
-                <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divAddSpecies', 'divSetupSpecies')">
-                <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="insFab(); divToggle('divAddSpecies', 'divSetupSpecies')">
+                <button class="ui-button ui-btn-inline" onClick="insFab(); divToggle('divAddSpecies', 'divSetupSpecies'); return false;">Save</button>
+                <button class="ui-button ui-btn-inline" onClick="divToggle('divAddSpecies', 'divSetupSpecies'); return false;">Back</button>
             </form>
         </div>
         <div id="divEditSpecies" style="display:none">
             <h1 style="text-align: center">Edit a species</h1>
-            <form id="frmEditSpecies" class="anuform">
+            <form id="frmEditSpecies">
                 <input type="hidden" id="x_fabcode" name="x_fabcode"/>
                 <fieldset>
                     <legend>Edit a species</legend>
                     <label for="x_fababbr"><strong>Abbreviation</strong></label>
-                    <input type="text" class="text" id="x_fababbr" name="x_fababbr" maxlength="16"/>
+                    <input type="text" id="x_fababbr" name="x_fababbr" maxlength="16"/>
                     <br />
                     <label for="x_fabname"><strong>Name</strong></label>
-                    <input type="text" class="dates" id="x_fabname" name="x_fabname" maxlength="64" value=""/>
+                    <input type="text" id="x_fabname" name="x_fabname" maxlength="64" value=""/>
                     <br />
                     <fieldset data-role="controlgroup" data-type="horizontal">
                         <legend>Default</legend>
@@ -192,8 +206,8 @@ and open the template in the editor.
                         <label for="x_edtfabdefault_N">No</label>
                     </fieldset>
                 </fieldset>
-                <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divEditSpecies', 'divSetupSpecies')">
-                <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updFab(); divToggle('divEditSpecies', 'divSetupSpecies')">
+                <button class="ui-button ui-btn-inline" onClick="updFab(); divToggle('divEditSpecies', 'divSetupSpecies'); return false;">Save</button>
+                <button class="ui-button ui-btn-inline" onClick="divToggle('divEditSpecies', 'divSetupSpecies'); return false;">Back</button>
             </form>
         </div>
         <div id="divSpeciesGp" style="display:none">
@@ -204,9 +218,9 @@ and open the template in the editor.
 				<table id="tbl_link_spegp" class="fullwidth">
 				<tbody>
 				</tbody>
-		        </table>            
-            <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updSpeGp(); divToggle('divSpeciesGp', 'divSetupSpecies')">
-            <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divSpeciesGp', 'divSetupSpecies')">
+		        </table> 
+            <button class="ui-button ui-btn-inline" onClick="updSpeGp(); divToggle('divSpeciesGp', 'divSetupSpecies'); return false;">Save</button>
+            <button class="ui-button ui-btn-inline" onClick="divToggle('divSpeciesGp', 'divSetupSpecies'); return false;">Back</button>
             </form>
         </div>
         
@@ -217,7 +231,7 @@ and open the template in the editor.
         -->
         <div id="divListAttr" style="display:none">
             <h1 style="text-align: center">FTARS Attribute List</h1>
-            <input class="btn-uni-grad btn-medium" type="button" value="Add an attribute" onClick="divToggle('divListAttr', 'divAddAttr')"/>
+            <button class="ui-button ui-btn-inline" onClick="divToggle('divListAttr', 'divAddAttr'); return false;">Add an attribute</button>
             <table id="tbl_attr_list" class="fullwidth">
                <tr>
                     <th>Abbr</th>
@@ -225,11 +239,11 @@ and open the template in the editor.
                     <th>&nbsp;</th>
                 </tr>
             </table>
-            <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divListAttr', 'content')"/>
+            <button class="ui-button ui-btn-inline" onClick="divToggle('divListAttr', 'content'); return false;">Back</button>
         </div>
         <div id="divAddAttr" style="display:none">
             <h1 style="text-align: center">Add an attribute</h1>
-            <form id="frmAddAttr" class="anuform">
+            <form id="frmAddAttr">
                 <fieldset>
                     <legend>Add a new attribute</legend>
                     <label for="x_facabbr"><strong>Abbreviation</strong></label>
@@ -238,13 +252,13 @@ and open the template in the editor.
                     <label for="x_facname"><strong>Name</strong></label>
                     <input type="text" class="text" id="x_facname" name="x_facname" maxlength="64" value=""/>
                 </fieldset>
-                <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divAddAttr', 'divListAttr')">
-                <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="insFac(); divToggle('divAddAttr', 'divListAttr')">
+                <button class="ui-button ui-btn-inline" onClick="insFac(); divToggle('divAddAttr', 'divListAttr'); return false;">Save</button>
+                <button class="ui-button ui-btn-inline" onClick="divToggle('divAddAttr', 'divListAttr'); return false;">Back</button>
             </form>
         </div>
         <div id="divEditAttr" style="display:none">
             <h1 style="text-align: center">Edit an attribute</h1>
-            <form id="frmEditAttr" class="anuform">
+            <form id="frmEditAttr">
                 <input type="hidden" id="x_faccode" name="x_faccode"/>
                 <fieldset>
                     <legend>Edit an attribute</legend>
@@ -254,8 +268,8 @@ and open the template in the editor.
                     <label for="x_facname"><strong>Name</strong></label>
                     <input type="text" class="text" id="x_facname" name="x_facname" maxlength="64" value=""/>
                 </fieldset>
-                <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divEditAttr', 'divListAttr')">
-                <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updFac(); divToggle('divEditAttr', 'divListAttr')">
+                <button class="ui-button ui-btn-inline" onClick="updFac(); divToggle('divEditAttr', 'divListAttr'); return false">Save</button>
+                <button class="ui-button ui-btn-inline" onClick="divToggle('divEditAttr', 'divListAttr'); return false;">Back</button>
             </form>
         </div>
         
@@ -269,14 +283,14 @@ and open the template in the editor.
         
         <div id="divListGp" style="display:none">
             <h1 style="text-align: center">FTARS Group List</h1>
-            <input class="btn-uni-grad btn-medium" type="button" value="Add a group" onClick="divToggle('divListGp', 'divAddGp')">
+            <button class="ui-button ui-btn-inline" onClick="divToggle('divListGp', 'divAddGp'); return false;">Add a group</button>
             <table id="tbl_gp_list" class="fullwidth">
             </table>
-            <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divListGp', 'content')">
+            <button class="ui-button ui-btn-inline" onClick="divToggle('divListGp', 'content'); return false;">Back</button>
         </div>
         <div id="divAddGp" style="display:none">
             <h1 style="text-align: center">Add a group</h1>
-            <form id="frmAddGp" class="anuform">
+            <form id="frmAddGp">
                 <fieldset>
                     <legend>Add a new group</legend>
                     <label for="x_fadabbr"><strong>Abbreviation</strong></label>
@@ -285,13 +299,13 @@ and open the template in the editor.
                     <label for="x_fadname"><strong>Name</strong></label>
                     <input type="text" class="text" id="x_fadname" name="x_fadname" maxlength="64" value=""/>
                 </fieldset>
-                <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divAddGp', 'divListGp')">
-                <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="insFad(); divToggle('divAddGp', 'divListGp')">
+                <button class="ui-button ui-btn-inline" onClick="insFad(); divToggle('divAddGp', 'divListGp'); return false;">Save</button>
+                <button class="ui-button ui-btn-inline" onClick="divToggle('divAddGp', 'divListGp'); return false;">Back</button>
             </form>
         </div>
         <div id="divEditGp" style="display:none">
             <h1 style="text-align: center">Edit a group</h1>
-            <form id="frmEditGp" class="anuform">
+            <form id="frmEditGp">
                 <input type="hidden" id="x_fadcode" name="x_fadcode"/>
                 <fieldset>
                     <legend>Edit a group</legend>
@@ -301,8 +315,8 @@ and open the template in the editor.
                     <label for="x_fadname"><strong>Name</strong></label>
                     <input type="text" class="text" id="x_fadname" name="x_fadname" maxlength="64" value=""/>
                 </fieldset>
-                <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divEditGp', 'divListGp')">
-                <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updFad(); divToggle('divEditGp', 'divListGp')">
+                <button class="ui-button ui-btn-inline" onClick="updFad(); divToggle('divEditGp', 'divListGp'); return false">Save</button>
+                <button class="ui-button ui-btn-inline" onClick="divToggle('divEditGp', 'divListGp'); return false;">Back</button>
             </form>
         </div>
         <div id="divGpAttr" style="display:none">
@@ -313,9 +327,9 @@ and open the template in the editor.
 				<table id="tbl_link_attr" class="fullwidth">
 				<tbody>
 				</tbody>
-		        </table>            
-            <input class="btn-uni-grad btn-medium" type="button" value="Save" onClick="updGpAttr(); divToggle('divGpAttr', 'divListGp')">
-            <input class="btn-uni-grad btn-medium" type="button" value="Back" onClick="divToggle('divGpAttr', 'divListGp')">
+		        </table> 
+            <button class="ui-button ui-btn-inline" onClick="updGpAttr(); divToggle('divGpAttr', 'divListGp'); return false;">Save</button>
+            <button class="ui-button ui-btn-inline" onClick="divToggle('divGpAttr', 'divListGp'); return false;">Back</button>
             </form>
         </div>
 

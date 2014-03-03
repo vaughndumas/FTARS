@@ -132,8 +132,8 @@ function getFad() {
                             }
                             v_trdata = "<tr><td>" + v_results.rows.item(v_count).fadabbr + "</td>";
                             v_trdata += "<td>" + v_results.rows.item(v_count).fadname + "</td>";
-                            v_trdata += "<td><input class='btn-uni-grad btn-small' type=\"button\" value=\"Edit\" onClick=\"editGp("+v_results.rows.item(v_count).fadcode+");\"/>";
-                            v_trdata += "&nbsp;<input class='btn-uni-grad btn-small' type=\"button\" value=\"Attributes\" onClick=\"editGpAttr("+v_results.rows.item(v_count).fadcode+");\"/></td>";
+                            v_trdata += "<td><button class=\"ui-button ui-btn-inline\" onClick=\"editGp("+v_results.rows.item(v_count).fadcode+");\">Edit</button>";
+                            v_trdata += "&nbsp;<button class=\"ui-button ui-btn-inline\" onClick=\"editGpAttr("+v_results.rows.item(v_count).fadcode+");\">Attributes</button></td>";
                             v_trdata += "</tr>";
                             $(v_trdata).appendTo("#divListGp #tbl_gp_list");
                          }

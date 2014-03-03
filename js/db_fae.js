@@ -17,7 +17,8 @@ function getFae() {
                                        + v_results.rows.item(v_count).fabname
                                        + ' (' + v_results.rows.item(v_count).fababbr + ')'
                                        + '</option>';
-                            $(v_listdata).appendTo("#divAddSpm #x_faespecies");
+                            $("#divAddSpm #x_faespecies").append(v_listdata).trigger("create");
+                            //$(v_listdata).appendTo("#divAddSpm #x_faespecies").trigger("create");
                          }
                      }, 
                      errorHandler) ;
@@ -40,9 +41,13 @@ function listFae() {
                              v_trdata  = "<tr>";
                              v_trdata += "<td>" + v_results.rows.item(v_count).faeseq + "</td>";
                              v_trdata += "<td>" + v_results.rows.item(v_count).fabname 
-                                       + " (" + v_results.rows.item(v_count).fababbr + ") - rowcode:"+v_results.rows.item(v_count).faecode + "</td>";
+                                       + " (" + v_results.rows.item(v_count).fababbr + ")</td>";
                              v_trdata += "<td><button class=\"ui-button ui-btn-inline\" onClick=\"editFae("+v_results.rows.item(v_count).faecode+");\">Edit</button></td>";
-                             v_trdata += "<td><button class=\"ui-button ui-btn-inline\" onClick=\"recordFae("+v_results.rows.item(v_count).faecode+");\">Record Data</button></td>";
+                             v_trdata += "<td><button class=\"ui-button ui-btn-inline\" onClick=\"recordData("
+                                       + v_results.rows.item(v_count).faecode+", "
+                                       + "'" + v_results.rows.item(v_count).fabname + "', "
+                                       + "'" + v_results.rows.item(v_count).fababbr
+                                       + "');\">Record Data</button></td>";
                              v_trdata += "</tr>";
                              $(v_trdata).appendTo("#tbl_spm_list");
                          }
@@ -66,11 +71,12 @@ function insFae() {
 
 function editFae(x_faecode) {
     $("#divListSpecimens").hide();
-    $("#divEditSpm").show();
+    $("#divEditSpm").show("fast");
     
     $("#divEditSpm #x_faespecies").empty();
     $("#frmEditSpm #x_faecode").val(x_faecode);
     var v_defaultspecies = '';
+    var v_listdata = '';
     db.transaction(function(tx) {
         tx.executeSql('SELECT faeseq, faespecies FROM faespm WHERE faecode = ?', [x_faecode],
                       function(tx, v_results) {
@@ -79,7 +85,7 @@ function editFae(x_faecode) {
                       },
                       errorHandler);
         // Populate the SELECT
-        tx.executeSql('SELECT fabcode, fabname, fababbr FROM fabspe ORDER BY fababbr',
+        tx.executeSql('SELECT fabcode, fabname, fababbr, fabdefault FROM fabspe ORDER BY fababbr',
                      [],
                      function(tx, v_results) {
                          var v_rowcount = v_results.rows.length;
@@ -91,9 +97,11 @@ function editFae(x_faecode) {
                                        + v_results.rows.item(v_count).fabname
                                        + ' (' + v_results.rows.item(v_count).fababbr + ')'
                                        + '</option>';
-                            $(v_listdata).appendTo("#frmEditSpm #x_faespecies", "#divEditSpm");
+                            $("#frmEditSpm #x_faespecies").append(v_listdata).trigger("create");
+                            //$(v_listdata).appendTo("#frmEditSpm #x_faespecies", "#divEditSpm").trigger("create");
                          }
                      }, errorHandler);
+        $("#frmEditSpm #x_faespecies select").selectmenu();
     });
 }
 

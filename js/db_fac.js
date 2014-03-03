@@ -53,7 +53,7 @@ function getFac() {
                             }
                             v_trdata = "<tr><td>" + v_results.rows.item(v_count).facabbr + "</td>";
                             v_trdata += "<td>" + v_results.rows.item(v_count).facname + "</td>";
-                            v_trdata += "<td><input class='btn-uni-grad btn-small' type=\"button\" value=\"Edit\" onClick=\"editAttr("+v_results.rows.item(v_count).faccode+");\"/></td>";
+                            v_trdata += "<td><button class=\"ui-button ui-btn-inline\" onClick=\"editAttr("+v_results.rows.item(v_count).faccode+");\">Edit</button></td>";
                             v_trdata += "</tr>";
                             $(v_trdata).appendTo("#divListAttr #tbl_attr_list");
                          }
