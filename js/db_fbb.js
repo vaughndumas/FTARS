@@ -84,7 +84,8 @@ function updSpeGp() {
                       function(tx, v_results) {
                         var v_rowcount = v_results.rows.length;
                         for (v_count = 0; v_count < v_rowcount; v_count++) {
-                            v_specimens[v_count] = v_results.rows.item(v_count).faecode;
+                            v_specimens.push(v_results.rows.item(v_count).faecode);
+//                            v_specimens[v_count] = v_results.rows.item(v_count).faecode;
                         }
                     }, nullData);
     });
@@ -159,7 +160,7 @@ function updSpeGp() {
                                     for (var v_count2 = 0; v_count2 < v_specimencount; v_count2 ++) {
                                         var v_faecode_ins = v_specimens[v_count2];
 
-                                        if (v_count2 === 0) {
+//                                        if (v_count2 === 0) {
                                             // Check for dispans header, create if necessary;
                                             var v_dispans = 'D';
                                             var v_counter = 0;
@@ -178,7 +179,7 @@ function updSpeGp() {
                                                               v_facname_ins,
                                                               v_dispans], nullData);
                                             } 
-                                        }
+//                                        }
                                         // Check if this record (A) exists in the array
                                         var v_found = 0;
                                         for (v_c = 0; v_c < v_fbc_arr.length; v_c ++) {

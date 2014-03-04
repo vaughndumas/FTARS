@@ -3,18 +3,18 @@ if(openDatabase){
 };
 
 
-function recordData(x_specimen, x_speciesname, x_speciesabbr) {
+function recordData(x_seq, x_specimen, x_speciesname, x_speciesabbr) {
     $("#divListSpecimens").hide();
     $("#divRecordData").show("fast");
     
     $("#divRecordData #tbl_recdata_list").empty();
     v_specdata = "<tr><th>Species:</th><td>" + x_speciesname + " (" + x_speciesabbr + ")</td></tr>";
-    v_specdata += "<tr><th>Specimen</th><td>" + x_specimen + "</td></tr>";
+    v_specdata += "<tr><th>Specimen</th><td>" + x_seq + "</td></tr>";
     $(v_specdata).appendTo("#frmRecData #tbl_recdata_list").trigger("create");
     
     db.transaction(function(tx) {
-        tx.executeSql('SELECT fbccode, fbcheader, fbcattrtitle, fbcdispans, fbcans FROM fbcsfa ORDER BY fbcheader, fbcdispans desc, fbcattrtitle',
-              [],
+        tx.executeSql('SELECT fbccode, fbcheader, fbcattrtitle, fbcdispans, fbcans FROM fbcsfa WHERE fbcspecimencode = ? ORDER BY fbcheader, fbcdispans desc, fbcattrtitle',
+              [x_specimen],
               function (tx, v_results) {
                   var v_rowcount = v_results.rows.length;
                   var v_trdata = '';
@@ -29,6 +29,8 @@ function recordData(x_specimen, x_speciesname, x_speciesabbr) {
                           v_trdata +=     "<input type='text' size=32 maxlength=64 id='x_fbcans_" + v_results.rows.item(v_count).fbccode + "' value='" + v_dispans + "'/>";
                           v_trdata += "</td></tr>";
                           $(v_trdata).appendTo("#frmRecData #tbl_recdata_list").trigger("create");
+                          $("#x_fbcans_" + v_results.rows.item(v_count).fbccode).val("");
+                          $("#x_fbcans_" + v_results.rows.item(v_count).fbccode).val(v_dispans);
                       }
                   }
               },

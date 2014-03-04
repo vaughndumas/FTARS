@@ -44,6 +44,7 @@ function listFae() {
                                        + " (" + v_results.rows.item(v_count).fababbr + ")</td>";
                              v_trdata += "<td><button class=\"ui-button ui-btn-inline\" onClick=\"editFae("+v_results.rows.item(v_count).faecode+");\">Edit</button></td>";
                              v_trdata += "<td><button class=\"ui-button ui-btn-inline\" onClick=\"recordData("
+                                       + v_results.rows.item(v_count).faeseq+", "
                                        + v_results.rows.item(v_count).faecode+", "
                                        + "'" + v_results.rows.item(v_count).fabname + "', "
                                        + "'" + v_results.rows.item(v_count).fababbr
