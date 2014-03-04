@@ -54,6 +54,7 @@ function updRecData() {
        $("#frmRecData #tbl_recdata_list tr[type=data] td input[type=text").each(function(v_index, v_element2) {
                  v_data_counter ++;
                  v_data_arr[v_data_counter] = $(v_element2).val();
+alert("add value " + v_data_arr[v_data_counter] + " to the stack");
        });
        for (v_counter = 0; v_counter <= v_code_counter; v_counter ++) {
            tx.executeSql(
