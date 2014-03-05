@@ -30,7 +30,7 @@ function recordData(x_seq, x_specimen, x_speciesname, x_speciesabbr) {
                           v_trdata += "</td></tr>";
                           $(v_trdata).appendTo("#frmRecData #tbl_recdata_list").trigger("create");
                           $("#x_fbcans_" + v_results.rows.item(v_count).fbccode).val("");
-                          $("#x_fbcans_" + v_results.rows.item(v_count).fbccode).val(v_dispans);
+                          $("#x_fbcans_" + v_results.rows.item(v_count).fbccode).val(v_dispans).trigger("create");
                       }
                   }
               },
@@ -47,14 +47,14 @@ function updRecData() {
        var v_data_counter = -1;
        var v_fbccode = 0;
        var v_ans = '';
-       $("#frmRecData #tbl_recdata_list tr[type=data] td input[type=hidden").each(function(v_index, v_element) {
+//       $("#divRecordData #frmRecData #tbl_recdata_list tr[type=data] td input[type=hidden]").each(function() { alert("found the form, table, data record, cell, hidden input"); });
+       $("#frmRecData #tbl_recdata_list tr[type=data] td input[type=hidden]").each(function(v_index, v_element) {
                  v_code_counter ++;
                  v_code_arr[v_code_counter] = $(v_element).val();
        });
-       $("#frmRecData #tbl_recdata_list tr[type=data] td input[type=text").each(function(v_index, v_element2) {
+       $("#frmRecData #tbl_recdata_list tr[type=data] td input[type=text]").each(function(v_index, v_element2) {
                  v_data_counter ++;
                  v_data_arr[v_data_counter] = $(v_element2).val();
-alert("add value " + v_data_arr[v_data_counter] + " to the stack");
        });
        for (v_counter = 0; v_counter <= v_code_counter; v_counter ++) {
            tx.executeSql(
