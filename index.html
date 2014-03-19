@@ -21,6 +21,7 @@ and open the template in the editor.
         <script src="js/db_fae.js"></script>
         <script src="js/db_fbb.js"></script>
         <script src="js/ftars001.js"></script>
+        <script src="js/ftars002.js"></script>
         <script>
             function showMain() {
                 $(function() {
@@ -33,8 +34,10 @@ and open the template in the editor.
                     $("#"+x_off).hide();
                     $("#"+x_on).show();
                 });
-                if (x_on === "divSetup")
+                if (x_on === "divSetup") {
                     getFaa();
+                    document.addEventListener("backbutton", function() {$("#"+x_on).show; $("#"+x_off).hide;}, false);
+                }
                 else if (x_on === "divSetupSpecies")
                     getFab();
                 else if (x_on === "divListAttr")
@@ -49,17 +52,18 @@ and open the template in the editor.
             }
         </script>
     </head>
-    <body style="background-color: #FFF">
+    <body style="background-color: #000">
         <div id="content">
             <h1 style="text-align: center">Field Trip</h1>
-            <h2 style="text-align: center">Attribute Recording (1.1.0.13)</h2>
+            <h2 style="text-align: center">Attribute Recording (1.1.1.0)</h2>
             <button class="ui-button ui-corner-all" onClick="divToggle('content', 'divSetup');">Setup</button>
             <button class="ui-button ui-corner-all" onClick="divToggle('content', 'divSetupSpecies');">View Species</button>
             <button class="ui-button ui-corner-all" onClick="divToggle('content', 'divListSpecimens');">View Specimens</button>
             <button class="ui-button ui-corner-all" onClick="divToggle('content', 'divListAttr');">View Attributes</button>
             <button class="ui-button ui-corner-all" onClick="divToggle('content', 'divListGp');">View Groups</button>
+            <button class="ui-button ui-corner-all" onClick="divToggle('content', 'divSyncUp');">Upload Survey Data</button>
         </div>
-        <div id="divSetup" style="display:none; background-color: #FFF">
+        <div id="divSetup" style="display:none;">
             <h1 style="text-align: center">FTARS Setup</h1>
             <form id="frmFieldTrip">
                 <fieldset>
@@ -213,7 +217,7 @@ and open the template in the editor.
         <div id="divSpeciesGp" style="display:none">
             <h1 style="text-align: center">FTARS Link groups to species</h1>
             <form>
-            <input id="x_fabname" type="text" disabled/>
+            <input class="ui-state-disabled" id="x_fabname" type="text" disabled/>
             <input type="hidden" name="x_fbbspecies" id="x_fbbspecies"/>
 				<table id="tbl_link_spegp" class="fullwidth">
 				<tbody>
@@ -331,6 +335,14 @@ and open the template in the editor.
             <button class="ui-button ui-btn-inline" onClick="updGpAttr(); divToggle('divGpAttr', 'divListGp'); return false;">Save</button>
             <button class="ui-button ui-btn-inline" onClick="divToggle('divGpAttr', 'divListGp'); return false;">Back</button>
             </form>
+        </div>
+        
+        <div id="divSyncUp" style="display:none">
+            <h1 style="text-align: center">Load field trip data onto server</h1>
+            <div id="syncLoading" style="display:none">Loading data...</div>
+            <span id="syncLoaded" style="display:none">Upload complete</span>
+            <button class="ui-button ui-btn-inline" onClick="syncUp(); return false;">Start sync</button>
+            <button class="ui-button ui-btn-inline" onClick="divToggle('divSyncUp', 'content'); return false;">Back</button>
         </div>
 
     </body>
